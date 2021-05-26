@@ -19,4 +19,24 @@
     <servlet-name>User_dao</servlet-name>
     <url-pattern>/User_dao</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>User_info</display-name>
+    <servlet-name>User_info</servlet-name>
+    <servlet-class>model.User_info</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>User_info</servlet-name>
+    <url-pattern>/User_info</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Main</display-name>
+    <servlet-name>Main</servlet-name>
+    <servlet-class>main.Main</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Main</servlet-name>
+    <url-pattern>/Main</url-pattern>
+  </servlet-mapping>
 </web-app>
