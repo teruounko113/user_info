@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class UserDAO {
 		}	
 	}
 	
-	// priductsテーブルのデータを全て取得
+	// productsテーブルのデータを全て取得
 	public List<User_info> findAll(){
 		
 		List<User_info> userList=new ArrayList<>();
@@ -58,8 +57,7 @@ public class UserDAO {
 				int id=rs.getInt("id");
 				String name=rs.getString("name");
 				String sex=rs.getString("sex");
-				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String born=sdf.format(rs.getTimestamp("born"));
+				String born=rs.getString("born");
 				User_info user_info=new User_info(id,name,sex,born);
 				userList.add(user_info);
 			}
@@ -80,7 +78,7 @@ public class UserDAO {
 			ps=db.prepareStatement("INSERT INTO user(name,sex,born) VALUES(?,?,?)");
 			ps.setString(1,user_info.getName());
 			ps.setString(2,user_info.getSex());
-			ps.setString(3, user_info.getBorn());
+			ps.setString(3,user_info.getBorn());
 			int result=ps.executeUpdate();
 			if(result != 1){
 				return false;

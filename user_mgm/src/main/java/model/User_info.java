@@ -14,19 +14,18 @@ public class User_info implements Serializable{
 	//*************************************
 	// コンストラクタ
 	//*************************************
-	public User_info(int id, String name, String sex, String born){}
+	public User_info(){}
 	
-	public User_info(String name,String sex){
+	public User_info(int id, String name, String sex, String born){
+		this(name,sex,born);
+		this.id=id;
+	}
+	
+	public User_info(String name,String sex,String born){
 		this.name=name;
 		this.sex=sex;
+		this.born=born;
 	}
-	
-	public User_info(int id,String name,String sex){
-		this(name,sex);
-		this.id=id;
-		
-	}
-	
 	//*************************************
 	// メソッドの定義
 	//*************************************
@@ -57,7 +56,6 @@ public class User_info implements Serializable{
 		return sex;
 	}
 	
-	// 値段を設定
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
