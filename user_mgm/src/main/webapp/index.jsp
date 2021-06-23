@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="model.*,java.util.*"%>
 <%
 List<User_info> list = (List<User_info>)request.getAttribute("list");
-
 %>
 
 <!DOCTYPE html>
@@ -20,19 +19,22 @@ List<User_info> list = (List<User_info>)request.getAttribute("list");
 			<br>
 			名前:<input type="text" name="name">
 			<br>
-			性別:<input type="radio" name="sex" value="men">男
-			<input type="radio" name="sex" value="women">女
+			性別:<input type="radio" name="sex" value="男">男
+			<input type="radio" name="sex" value="女">女
 			<br>
 			生年月日:<input type="text" name="born"> 
 			<input type="submit" value="送信">
 		</form>
 
-<table class="table table-striped mt-4">
-<tr><th>製品名</th><th>価格</th><th>更新日</th><th></th></tr>
-<%for(User_info u:list) {%>
-<tr><th><%=u.getName() %></th><td><%=u.getSex() %></td><td><%=u.getBorn() %></td>
+<br>
+<%if(list != null && list.size()>0){%>
+<table>
+<tr><th>名前</th><th>性別</th><th>更新日</th><th></th></tr>
+<%for(User_info u : list) {%>
+<tr><td><%=u.getName() %></td><td><%=u.getSex() %></td><td><%=u.getBorn() %></td>
 </tr>
 <%} %>
 </table>
+<%} %>
 	</body>
 </html>

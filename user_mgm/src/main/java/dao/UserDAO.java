@@ -93,4 +93,25 @@ public class UserDAO {
 		return true;
 	}
 	
+	// 引数でしたIDのデータを削除
+	public boolean deleteOne(int id){
+		
+		try{
+			this.getConnection();
+			ps=db.prepareStatement("DELETE FROM user WHERE id=?");
+			ps.setInt(1, id);
+			int result=ps.executeUpdate();
+			if(result != 1){
+				return false;
+			}
+		}catch (SQLException e) {	
+			e.printStackTrace();
+		} catch (NamingException e) {	
+			e.printStackTrace();
+		}finally{
+			this.disconnect();
+		}
+		return true;
+	}
+	
 }

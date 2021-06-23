@@ -21,9 +21,22 @@ public class Main extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO dao=new UserDAO();
 		
+		String action=request.getParameter("action");
+		
+		// パラメーター判定
+		if(action != null && action.equals("delete")){
+			// deleteの場合
+			// 対象データを削除
+			dao.deleteOne(Integer.parseInt(request.getParameter("id")));
+			
+			// 応答データ作成
+			request.setAttribute("msg", "1件削除しました。");
+			
+		}
+		
 		List<User_info> list=dao.findAll();
 		request.setAttribute("list", list);
-		RequestDispatcher rd= request.getRequestDispatcher("index.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/view/main.jsp");
 		rd.forward(request, response);
 		
 	}
