@@ -31,7 +31,7 @@ List<User_info> list = (List<User_info>)request.getAttribute("list");
 <table>
 <tr><th>名前</th><th>性別</th><th>更新日</th><th></th></tr>
 <%for(User_info u : list) {%>
-<tr><td><%=u.getName() %></td><td><%=u.getSex() %></td><td><%=u.getBorn() %></td>
+<tr><td><%=u.getName() %></td><td><%=u.getSex() %></td><td><%=u.getBorn() %></td><td><a href="/user_mgm/main?action=delete&id=<%=String.valueOf(u.getId()) %>" class="btn btn-danger" onclick="return confirm('削除してよろしいですか？');">削除</a></td>
 </tr>
 <%} %>
 </table>

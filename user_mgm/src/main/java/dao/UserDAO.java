@@ -114,4 +114,49 @@ public class UserDAO {
 		return true;
 	}
 	
+	public User_info findOne(int id){
+		User_info user_info=null;
+		try{
+			this.getConnection();
+			ps=db.prepareStatement("SELECT * FROM user WHERE id=?");
+			ps.setInt(1, id);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				String name=rs.getString("name");
+				String sex=rs.getString("sex");
+				String born=rs.getString("updated");
+				user_info=new User_info(id,name,sex,born);
+			}
+			
+		}catch (SQLException e) {	
+			e.printStackTrace();
+		} catch (NamingException e) {	
+			e.printStackTrace();
+		}finally{
+			this.disconnect();
+		}
+		return user_info;
+	}
+	
+	public boolean updateOne(User_info user_info){
+		try{
+			this.getConnection();
+			ps=db.prepareStatement("UPDATE products SET name=?,price=?,updated=? WHERE id=?");
+			ps.setString(1, user_info.getName());
+			ps.setString(2, user_info.getSex());
+			ps.setString(3, user_info.getBorn());
+			ps.setInt(4, user_info.getId());
+			int result=ps.executeUpdate();
+			if(result != 1){
+				return false;
+			}
+		}catch (SQLException e) {	
+			e.printStackTrace();
+		} catch (NamingException e) {	
+			e.printStackTrace();
+		}finally{
+			this.disconnect();
+		}
+		return true;
+	}
 }

@@ -2,6 +2,15 @@
     pageEncoding="UTF-8" import="model.*,java.util.*"%>
 <%
 List<User_info> list = (List<User_info>)request.getAttribute("list");
+User_info user_info=(User_info)request.getAttribute("user_info");
+String id=user_info==null ? "":String.valueOf(user_info.getId());
+String name=user_info == null ? "":user_info.getName();
+String sex=user_info == null ? "":String.valueOf(user_info.getSex());
+String born=user_info == null ? "":String.valueOf(user_info.getBorn());
+String title=(String)request.getAttribute("title");
+title=title==null? "商品を登録してください。":title;
+String err=(String)request.getAttribute("err");
+String msg=(String)request.getAttribute("msg");
 %>
 
 <!DOCTYPE html>
@@ -17,12 +26,12 @@ List<User_info> list = (List<User_info>)request.getAttribute("list");
 		<form action="<%= request.getContextPath()%>/main"  method="post">
 			<input type="hidden" name="id">
 			<br>
-			名前:<input type="text" name="name">
+			名前:<input type="text" name="name" value="<%=name%>">
 			<br>
-			性別:<input type="radio" name="sex" value="男">男
-			<input type="radio" name="sex" value="女">女
+			性別:<input type="radio" name="sex" value="<%=sex%>">男
+			<input type="radio" name="sex" value="<%=sex%>">女
 			<br>
-			生年月日:<input type="text" name="born"> 
+			生年月日:<input type="text" name="born" value="<%=born%>"> 
 			<input type="submit" value="送信">
 		</form>
 
@@ -31,7 +40,11 @@ List<User_info> list = (List<User_info>)request.getAttribute("list");
 <table>
 <tr><th>名前</th><th>性別</th><th>生年月日</th><th></th></tr>
 <%for(User_info u : list) {%>
-<tr><td><%=u.getName() %></td><td><%=u.getSex() %></td><td><%=u.getBorn() %></td><td><a href="/user_mgm/main?action=delete&id=<%=String.valueOf(u.getId()) %>" class="btn btn-danger" onclick="return confirm('削除してよろしいですか？');">削除</a></td>
+<tr><td><%=u.getName() %></td>
+	<td><%=u.getSex() %></td>
+	<td><%=u.getBorn() %></td>
+	<td><a href="/user_mgm/main?action=update&id=<%=String.valueOf(u.getId()) %>" class="btn btn-primary">更新</a></td>
+	<td><a href="/user_mgm/main?action=delete&id=<%=String.valueOf(u.getId()) %>" class="btn btn-danger" onclick="return confirm('削除してよろしいですか？');">削除</a></td>
 </tr>
 <%} %>
 </table>

@@ -32,6 +32,15 @@ public class Main extends HttpServlet {
 			// 応答データ作成
 			request.setAttribute("msg", "1件削除しました。");
 			
+		}else if(action != null && action.equals("update")){
+			// updateの場合
+			// 対象データを更新
+			// 対象データを検索
+			User_info user_info = dao.findOne(Integer.parseInt(request.getParameter("id")));
+			
+			// 応答データ作成
+			request.setAttribute("user_info", user_info);
+			request.setAttribute("title", "項目を編集してください。");
 		}
 		
 		List<User_info> list=dao.findAll();
@@ -56,16 +65,23 @@ public class Main extends HttpServlet {
 		//bornバラメータ取得
 		String born=request.getParameter("born");
 		
-		UserDAO dao=new UserDAO();
 		
 		// 入力値チェック
 		if(name.isEmpty() || sex.isEmpty() || born.isEmpty()){
 			request.setAttribute("err","未記入の項目があります！");
 		}else{
+			UserDAO dao=new UserDAO();
+			String id=request.getParameter("id");
+			if(id != null){
+				// 既に登録済みデータの場合は更新
+				dao.updateOne(new User_info(Integer.parseInt(id),name,sex,born));
+				request.setAttribute("msg","1件更新しました。");
+			}else {
 			// 未登録の場合は、新規追加
-			dao.insertOne(new User_info(name,sex,born));
-			request.setAttribute("msg","1件登録しました。");
-		}	
+				dao.insertOne(new User_info(name,sex,born));
+				request.setAttribute("msg","1件登録しました。");
+			}	
+		}
 		doGet(request,response);
 	}
 }
