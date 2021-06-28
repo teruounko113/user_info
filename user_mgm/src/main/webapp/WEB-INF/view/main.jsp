@@ -24,12 +24,12 @@ String msg=(String)request.getAttribute("msg");
 
 
 		<form action="<%= request.getContextPath()%>/main"  method="post">
-			<input type="hidden" name="id">
+			<input type="hidden" name="id" value="<%=id%>">
 			<br>
 			名前:<input type="text" name="name" value="<%=name%>">
 			<br>
-			性別:<input type="radio" name="sex" value="<%=sex%>">男
-			<input type="radio" name="sex" value="<%=sex%>">女
+			性別:<input type="radio" name="sex">男
+			<input type="radio" name="sex">女
 			<br>
 			生年月日:<input type="text" name="born" value="<%=born%>"> 
 			<input type="submit" value="送信">

@@ -124,7 +124,7 @@ public class UserDAO {
 			if(rs.next()){
 				String name=rs.getString("name");
 				String sex=rs.getString("sex");
-				String born=rs.getString("updated");
+				String born=rs.getString("born");
 				user_info=new User_info(id,name,sex,born);
 			}
 			
@@ -141,7 +141,7 @@ public class UserDAO {
 	public boolean updateOne(User_info user_info){
 		try{
 			this.getConnection();
-			ps=db.prepareStatement("UPDATE products SET name=?,price=?,updated=? WHERE id=?");
+			ps=db.prepareStatement("UPDATE user SET name=?,sex=?,born=? WHERE id=?");
 			ps.setString(1, user_info.getName());
 			ps.setString(2, user_info.getSex());
 			ps.setString(3, user_info.getBorn());

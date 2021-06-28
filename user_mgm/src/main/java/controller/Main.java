@@ -55,7 +55,7 @@ public class Main extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 文字コード設定
 		request.setCharacterEncoding("UTF-8");
-		
+
 		// nameパラメーター取得
 		String name=request.getParameter("name");
 		
@@ -67,9 +67,9 @@ public class Main extends HttpServlet {
 		
 		
 		// 入力値チェック
-		if(name.isEmpty() || sex.isEmpty() || born.isEmpty()){
-			request.setAttribute("err","未記入の項目があります！");
-		}else{
+		//if(name.isEmpty() || sex.isEmpty() || born.isEmpty()){
+			//request.setAttribute("err","未記入の項目があります！");
+		//}else{
 			UserDAO dao=new UserDAO();
 			String id=request.getParameter("id");
 			if(id != null){
@@ -77,11 +77,11 @@ public class Main extends HttpServlet {
 				dao.updateOne(new User_info(Integer.parseInt(id),name,sex,born));
 				request.setAttribute("msg","1件更新しました。");
 			}else {
-			// 未登録の場合は、新規追加
+				// 未登録の場合は、新規追加
 				dao.insertOne(new User_info(name,sex,born));
 				request.setAttribute("msg","1件登録しました。");
 			}	
-		}
+		//}
 		doGet(request,response);
 	}
 }
