@@ -29,9 +29,8 @@ request.setCharacterEncoding("UTF-8");
 			<br>
 			名前:<input type="text" name="name" value="<%=name%>">
 			<br>
-			<p><%=sex %></p>
-			性別:<input type="radio" name="sex" value="男" <%if(sex == "男"){ %>checked<%} %>>男
-			<input type="radio" name="sex" value="女" <%if(sex == "女"){ %>checked<%} %>>女
+			性別:<input type="radio" name="sex" value="男" <%if(sex.equals("男")){ %>checked<%} %>>男
+			<input type="radio" name="sex" value="女" <%if(sex.equals("女")){ %>checked<%} %>>女
 			<br>
 			生年月日:<input type="text" name="born" value="<%=born%>"> 
 			<input type="submit" value="送信">

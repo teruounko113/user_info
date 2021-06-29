@@ -72,7 +72,7 @@ public class Main extends HttpServlet {
 		}else{
 			UserDAO dao=new UserDAO();
 			String id=request.getParameter("id");
-			if(id != null){
+			if(id != ""){
 				// 既に登録済みデータの場合は更新
 				dao.updateOne(new User_info(Integer.parseInt(id),name,sex,born));
 				request.setAttribute("msg","1件更新しました。");
